@@ -1,0 +1,16 @@
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui"
+          onLoad="OnLoad">
+  <ribbon>
+    <tabs>
+      <tab id="MyAutomationTab" label="Automation">
+        <group id="MainGroup" label="Tools">
+          <button
+            id="RunButton"
+            label="Run Automation"
+            size="large"
+            onAction="OnRunAutomation"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
