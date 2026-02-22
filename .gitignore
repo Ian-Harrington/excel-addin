@@ -131,3 +131,4 @@ dmypy.json
 # Test / output files
 *.csv
 *.xlsx
+/test
