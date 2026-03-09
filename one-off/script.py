@@ -3,8 +3,9 @@ from dataclasses import dataclass
 
 from openpyxl import load_workbook, Workbook
 
-WORKBOOK_PATH = "CoreMark.xlsx"
+WORKBOOK_PATH = "input.xlsx"
 OUTPUT_PATH = "output.xlsx"
+DATA_SHEET_NAME = "Sheet1"
 
 YEARS = [2024, 2025, 2026]
 DEFAULT_START = date(2024, 10, 23)
@@ -30,6 +31,7 @@ class Record:
 ########################################
 ### INGEST
 ########################################
+
 def validate_headers(header_map):
     missing = REQUIRED_COLUMNS - header_map.keys()
 
@@ -74,7 +76,7 @@ def parse_dates(value):
 
 def load_records(path):
     wb = load_workbook(path)
-    ws = wb["Sheet1"]
+    ws = wb[DATA_SHEET_NAME]
 
     header_map = build_header_map(ws)
     validate_headers(header_map)
@@ -102,6 +104,7 @@ def load_records(path):
 ########################################
 ### EMIT
 ########################################
+
 def overlaps_year(start, end, year):
     return not (
         end < date(year, 1, 1) or
@@ -116,7 +119,6 @@ def bound_to_year(start, end, year):
 
 
 def emit_workbook(records, path):
-
     wb = Workbook()
     sheets = {}
 
